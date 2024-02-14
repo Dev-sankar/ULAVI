@@ -22,7 +22,7 @@ const GreeenhouseFrom = () => {
   const [number, setnumber] = useState('');
   const [Date, setDate] = useState('');
   const [email, setemail] = useState('');
-  const [image, setimage] = useState(null);
+  // const [image, setimage] = useState('');
 
   const handletypeChange = (e) => {
     settype(e.target.value);
@@ -92,9 +92,9 @@ const GreeenhouseFrom = () => {
     setemail(e.target.value);
   };
 
-  const handleimageChange = (e) => {
-    setimage(e.target.file[0]);
-  };
+  // const handleimageChange = (e) => {
+  //   setimage(e.target.file[0]);
+  // };
 
   const handleUpload = async () => {
     const formData = new FormData();
@@ -110,10 +110,11 @@ const GreeenhouseFrom = () => {
     formData.append('number', number);
     formData.append('Date', Date);
     formData.append('email', email);
-    formData.append('image', image);
+    // formData.append('image', image);
     try {
       const response = await fetch('http://localhost:5000/api/users/greenhouse', {
         method: 'POST',
+        credentials: 'include',
         body: formData,
       });
       if (response.ok) {
@@ -161,7 +162,7 @@ return(
       <label htmlFor="ShopTime">Email:</label>
       <input type="text" id="email" value={email} onChange={handleemailChange} required />
       <label htmlFor="ShopPhoto">Image:</label>
-      <input type="file" id="image" value={image} onChange={handleimageChange} accept="image/*" required />
+      {/* <input type="file" id="image" value={GreeenhouseFrom.image.url} onChange={handleimageChange} accept="image/*" required /> */}
       <button type="button" onClick={handleUpload}>
         Upload
       </button>
@@ -199,7 +200,8 @@ return(
 //     try{
 //         const response = await fetch('http://localhost:5000/api/users/greenhouse',{
 //             method: 'POST',
-//             body: FormData,
+//             credentials: 'include',
+//             body: greenhouseorderstate,
 //         });
         
 //         if (!response.ok) {
@@ -251,7 +253,7 @@ return(
 //       const data = await greenhouseuser(greenhouseorderstate);
       
 
-//          // console.log(data);
+//         //  console.log(data);
 //     } catch (error) {
 //         toast.error('Error registering user');
 //         console.error(error);

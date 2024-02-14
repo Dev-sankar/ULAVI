@@ -1,5 +1,5 @@
 import React,{Fragment,useEffect, useState} from "react";
-import { Button } from "@blueprintjs/core";
+import { Button,InputGroup } from "@blueprintjs/core";
 import '@blueprintjs/core/lib/css/blueprint.css';
 import Table from 'react-bootstrap/Table';
 
@@ -7,6 +7,11 @@ import Table from 'react-bootstrap/Table';
 
 const ServiceDetail= ({ match }) => {
   const [ServiceDetails, setServiceDetails] = useState([]); // Initialize ServiceDetails as an empty array
+  const [newname, setnewname] = useState("");
+  const [newtype, setnewtype] = useState("");
+  const [newcategory, setnewcategory] = useState("");
+  const [newdescription, setnewdescription] = useState("");
+  const [newimage, setnewimgae] = useState("")
 
   useEffect(() => {
     loadService();
@@ -16,7 +21,7 @@ const ServiceDetail= ({ match }) => {
   {
      try 
      {
-         const response = await fetch('http://localhost:5000/api/users/ServicesDetails');
+         const response = await fetch('http://localhost:5000/api/users/ServicesDetails',{ credentials: 'include'});
           const data = await response.json(); 
           setServiceDetails(data); 
         } 
@@ -57,6 +62,34 @@ const ServiceDetail= ({ match }) => {
                 </tr>
               ))}
             </tbody>
+            <tfoot>
+              <tr>
+                <td><InputGroup  value={newname}
+                onChange={(e) => setnewname(e.target.value)}
+                placeholder= 'Enter Name ....'
+                /></td>
+                <td><InputGroup  value={newtype}
+                onChange={(e) => setnewtype(e.target.value)}
+                placeholder= 'Enter Type ....'
+                /></td>
+                   <td><InputGroup  value={newcategory}
+                onChange={(e) => setnewcategory(e.target.value)}
+                placeholder= 'Enter category ....'
+                /></td>
+                   <td><InputGroup  value={newdescription}
+                onChange={(e) => setnewdescription(e.target.value)}
+                placeholder= 'Enter description ....'
+                /></td>
+                  <td><InputGroup  value={newimage}
+                onChange={(e) => setnewimgae(e.target.value)}
+                placeholder= 'Enter image ....'
+                /></td>
+                <td>
+                  <Button intent='success'>Add Service</Button>
+                </td>
+              </tr>
+            </tfoot>
+
           </Table>
                       
          

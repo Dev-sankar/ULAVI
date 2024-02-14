@@ -13,6 +13,7 @@ dotenv.config();
 // // @access Public
 const green = asyncHandler(async (req,res) => {
   const {type,design,parts,sizes, style,structure,shape,floor,material,roof,name,address,number,Date,email,image} = req.body;
+ 
 
   const result = await cloudinary.uploader.upload(req.file.path, {
     folder: 'Greenhouse-details',
@@ -57,6 +58,7 @@ const green = asyncHandler(async (req,res) => {
       throw new Error ("Invaild data")
   }
  
+  
 })
 
 

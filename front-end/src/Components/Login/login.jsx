@@ -22,8 +22,8 @@ const LoginForm = () => {
         body: JSON.stringify(userData)
       });
       if (!response.ok) {
-        toast.error('Error Logging in');
-        throw new Error('Error logging in');
+        // toast.error('Error Logging in');
+        // throw new Error('Error logging in');
       }
       const data = await response.json();
       if (data.success) {

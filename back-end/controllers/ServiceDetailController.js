@@ -55,6 +55,7 @@ const getservicesdetail= asyncHandler(async (req, res) => {
 // route GET /api/users/ Servicedetail/id
 // @access isadmin
 const getservicedetailId = asyncHandler(async (req, res) => {
+  
     const serviceID = await Servicedetail.findById(req.params.id);
     if (serviceID) {
       res.json(serviceID);
@@ -63,6 +64,34 @@ const getservicedetailId = asyncHandler(async (req, res) => {
       throw new Error('Service not found');
     }
   });
+
+
+    // @desc Get a single Servies by ID
+// route GET /api/users/ Servicedetail/id
+// @access isadmin
+const getservicedetailName= asyncHandler(async (req, res) => {
+try{
+  const name = req.params.name;
+
+if(!name){
+  return res.status(400).json({error:"name require"});
+
+}
+const serviceName = await Servicedetail.find({name:name});
+
+      res.json(serviceName);
+} catch(error) {
+  console.error('Error fetching users', error);
+  res.status(500).json({error: 'Internal server Error'})
+}
+
+ 
+});
+
+
+
+
+
 
 
    // @desc Delete Servicedetail by ID
@@ -106,4 +135,4 @@ const deleteserviesdetailId = asyncHandler(async (req, res) => {
 
 
 
-export {  Createservice, getservicesdetail, getservicedetailId, deleteserviesdetailId,updateserviesdetail,};
+export {  Createservice, getservicesdetail, getservicedetailId, deleteserviesdetailId,updateserviesdetail,getservicedetailName};

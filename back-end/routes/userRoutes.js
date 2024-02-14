@@ -14,7 +14,7 @@ import { deletegreenId, getgreen, getgreenId, green } from '../controllers/Order
 import {orderLandScapes,getorderLandScapes, getorderLandScapeId, deleteorderLandScapeId}  from '../controllers/OrderLandScapeController.js'
 import { service ,getservices,getserviceId,deleteserviesId,UpdateService} from '../controllers/ServicesControllers.js';
 // import fromidable from 'express-formidable';
-import {Createservice,getservicesdetail,getservicedetailId,deleteserviesdetailId,updateserviesdetail } from '../controllers/ServiceDetailController.js'
+import {Createservice,getservicesdetail,getservicedetailId,deleteserviesdetailId,updateserviesdetail,getservicedetailName } from '../controllers/ServiceDetailController.js'
 
 
 // Multer configuration for handling file uploads
@@ -46,14 +46,15 @@ router.delete('/orderLandScape/:id',isAdmin,deleteorderLandScapeId);
 
 
 router.post('/Services',isAdmin,imageUpload.single('image'),service);
-router.get('/Services',getservices);
+router.get('/Services',isAdmin,getservices);
 router.get('/Services/:id', isAdmin,getserviceId);
 router.delete('/Services/:id', isAdmin,deleteserviesId);
 router.patch('/Services/:id',isAdmin,UpdateService);
 
 router.post('/ServicesDetails',isAdmin,imageUpload.single('image'),Createservice);
-router.get('/ServicesDetails',getservicesdetail);
+router.get('/ServicesDetails',isAdmin,getservicesdetail);
 router.get('/ServicesDetails/:id',isAdmin, getservicedetailId);
+router.get('/ServicesDetails/name/:name', getservicedetailName);
 router.delete('/ServicesDetails/:id',isAdmin,deleteserviesdetailId);
 router.patch('/ServicesDetails/:id',isAdmin,updateserviesdetail);
 

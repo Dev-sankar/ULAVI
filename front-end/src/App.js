@@ -14,8 +14,8 @@ import Projects from './Pages/Projects'
 import AdminHome from './Components/admin/adminHome'
 import Login from './Components/Login/login'
 import Register from './Components/Login/Register';
-import GreeenhouseFrom from './Components/GreenhouseOrderFrom'
-import Landscapepage from './Components/LandscapePage'
+import GreeenhouseFrom from './Components/GreenhouseOrderFrom';
+import ServiceDetail from './Components/LandscapePage'
 // import Navbar from './Components/Navbar';
 import  Contact from './Pages/Contact';
 import { ToastContainer } from 'react-toastify';
@@ -35,7 +35,8 @@ function App() {
         <Route path="/ Contact/*" element={<Contact/>}></Route>
         <Route path="/login/*" element={<Login/>}></Route>
         <Route path='/register/*' element={<Register/>}></Route>
-        {/* <Route path="/Landscapepage/*" element={<Landscapepage />}></Route> */}
+        <Route path='/GreeenhouseFrom/*' element={<GreeenhouseFrom/>}></Route>
+        <Route path='/ServiceDetail/:name' element={<ServiceDetail/>}></Route>
         
 
 
