@@ -6,15 +6,20 @@ const SerivcesdetailSchema = new mongoose.Schema({
         required:true
         
     },
-    type:{
-        type:String,
-        required:true
-    },
+    
     category:{
         type:String,
         required:true
     },
     description:{
+        type:String,
+        required:true
+    },
+    Price:{
+        type:String,
+        required:true
+    },
+    Services:{
         type:String,
         required:true
     },

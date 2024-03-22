@@ -75,7 +75,8 @@ const registerUser = asyncHandler(async (req,res) => {
             to : email ,
             subject : 'Message From ULAVI New Registration',
             html : `
-            <h5>Hello you successfully login tillage <h5/>
+            <h5>
+            "Welcome to our homegardening and greenhouse services ULAVI We're delighted to have you join our community of green-thumbed enthusiasts. By registering with us, you're taking the first step towards creating your own thriving garden oasis. Get ready to explore a world of gardening tips, expert advice, and high-quality products tailored to your needs. Let's embark on this green journey together and watch your garden flourish! Happy gardening!" <h5/>
             `
           };
           transporter.sendMail(mailOptions, function(error, info){
@@ -106,6 +107,7 @@ const logoutUser = asyncHandler(async (req,res) => {
 
     res.status(200).json({ message: 'User Logged out'})
 });
+
 
 
 // @desc get user profile
@@ -174,6 +176,25 @@ const updateUserProfile = asyncHandler(async (req,res) => {
 });
 
 
+
+
+
+   // @desc Delete Servicedetail by ID
+// route DELETE /api/users/Servicedetail:id
+// @access isadmin
+const deleteUserId = asyncHandler(async (req, res) => {
+  const {id} =req.params;
+
+   try  {
+     const deleteUser= await  User.findByIdAndDelete(id)
+     res.json({ message: 'User removed',deleteUser });
+   } catch {
+     res.status(404);
+     throw new Error('User not found');
+   }
+ });
+
+
 export{
      authUser,
     registerUser,
@@ -182,4 +203,5 @@ export{
     updateUserProfile,
     getAllUsers,
     getUserId,
+    deleteUserId
  };

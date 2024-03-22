@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import Navbar from '../Navbar';
 import Footer from '../Footer';
 import { Link, useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
+
 import 'react-toastify/dist/ReactToastify.css';
 
 const LoginForm = () => {
@@ -22,8 +23,6 @@ const LoginForm = () => {
         body: JSON.stringify(userData)
       });
       if (!response.ok) {
-        // toast.error('Error Logging in');
-        // throw new Error('Error logging in');
       }
       const data = await response.json();
       if (data.success) {
@@ -53,6 +52,7 @@ const LoginForm = () => {
       console.error(error);
     }
   };
+
   const handleSuccess = (message, role) => {
     toast.success(message);
     setTimeout(() => {
@@ -65,6 +65,7 @@ const LoginForm = () => {
       }
     }, 1000);
   };
+
   const handleError = (message) => {
     toast.error(message);
   };
@@ -73,6 +74,7 @@ const LoginForm = () => {
   return (
     <>
     <Navbar></Navbar>
+    <div className='login-body'> 
     <div className="login-container">
       <h2>Login</h2>
       <form onSubmit={handleFormSubmit}>
@@ -97,6 +99,7 @@ const LoginForm = () => {
             required
           />
         </div>
+       
 
         <button type="submit"className='button3' >Login</button>
         <div className="register-link">
@@ -104,11 +107,16 @@ const LoginForm = () => {
   <Link to="/register">Register</Link>
    </div>
       </form>
-     
+    </div>
     </div>
     <Footer></Footer>
     </>
+    
   );
 };
 
 export default LoginForm;
+
+
+
+

@@ -11,19 +11,24 @@ import asyncHandler from "express-async-handler";
 // // route     POST/api/orderlandScape/ landScape
 // // @access Public
 const orderLandScapes = asyncHandler(async (req,res) => {
-    const {design,type, scale, name,address,number,Date,email,image} = req.body;
+    const { name,address,number,WhatsAppnumber,Date,email,} = req.body;
+   
 
+  
     const result = await cloudinary.uploader.upload(req.file.path, {
       folder: 'LandScape-details',
   });
     
     const data = await orderLandScape.create ({
-        design,type,scale,name,address,number,Date,email,image:{
-          public_id: result.public_id,
-          url: result.secure_url,
-      },
+      
+        name,address,number,WhatsAppnumber,Date,email,image:{
+            public_id: result.public_id,
+            url: result.secure_url,
+          }
+      
 
     });
+   
     if(data){
         res.status(201).json(data);
 
@@ -37,7 +42,7 @@ const orderLandScapes = asyncHandler(async (req,res) => {
         var mailOptions = {
           from : 'sivasankarshiva008@gmail.com',
           to : email ,
-          subject : 'Message From Tillage New Registration',
+          subject : 'Message From ULAVI New Registration',
           html : `
           <h5>Hello you successfully send the landscapeorder <h5/>
           `
@@ -87,8 +92,9 @@ const getorderLandScapeId = asyncHandler(async (req, res) => {
 // @access Private
 const deleteorderLandScapeId = asyncHandler(async (req, res) => {
     const {id} =req.params;
+    console.log("land",id);
      try  {
-       const deletedlandScapeID= await orderLandScape.findOneAndDelete(id)
+       const deletedlandScapeID= await orderLandScape.findByIdAndDelete(id)
        res.json({ message: ' LandScape order removed',deletedlandScapeID });
      } catch {
        res.status(404);

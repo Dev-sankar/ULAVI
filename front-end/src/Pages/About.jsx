@@ -1,26 +1,14 @@
 import React,{Fragment} from "react";
-import Navbar from '../Components/Navbar';
-import Team from '../Components/Team';
-import Footer from '../Components/Footer';
+import Navbar from "../Components/Navbar";
+import Footer from "../Components/Footer"
+
 function About(){
     return(
         <Fragment>
 
 
-<Navbar></Navbar>
-<div className="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
-        <div className="container text-center py-5">
-            <h1 className="display-3 text-white mb-4 animated slideInDown">About Us</h1>
-            <nav aria-label="breadcrumb animated slideInDown">
-                <ol className="breadcrumb justify-content-center mb-0">
-                    <li className="breadcrumb-item"><a href="#">Home</a></li>
-                    <li className="breadcrumb-item"><a href="#">Pages</a></li>
-                    <li className="breadcrumb-item active" aria-current="page">About</li>
-                </ol>
-            </nav>
-        </div>
-    </div>
 
+<Navbar></Navbar>
 
 
     <div className="container-xxl py-5">
@@ -30,26 +18,27 @@ function About(){
                     <img className="img-fluid rounded" data-wow-delay="0.1s" src={require("../Assets/img/about.jpg")} />
                 </div>
                 <div className="col-lg-6 col-md-7 wow fadeInUp" data-wow-delay="0.3s">
-                    <h1 className="display-1 text-primary mb-0">25</h1>
-                    <p className="text-primary mb-4">Year of Experience</p>
+                    <h1 className="display-1  mb-0 name">1</h1>
+                    <p className=" mb-4 name">Year of Experience</p>
                     <h1 className="display-5 mb-4">We Make Your Home Like A Garden</h1>
-                    <p className="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
-                    <a className="btn btn-primary py-3 px-4" href="">Explore More</a>
+                    <p className="mb-4">
+Home garden is a complex multi-functional land use system that combines multiple farming components of the homestead and provides environmental services, household needs, and employment and income generation opportunities to the households.</p>
+                    <a className="btn btn py-3 px-4 sign" href="" style={{color:"white"}}>Explore More</a>
                 </div>
                 <div className="col-lg-3 col-md-12 wow fadeInUp" data-wow-delay="0.5s">
                     <div className="row g-5">
                         <div className="col-12 col-sm-6 col-lg-12">
                             <div className="border-start ps-4">
-
-                                <h4 className="mb-3">Award Winning</h4>
-                                <span>Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna</span>
+                            <i className="fa fa-users fa-3x mb-3 name"></i>
+                                <h4 className="mb-3"></h4>
+                                <span>This man is faced with the complete loss of productivity of his two acres of market and home garden.</span>
                             </div>
                         </div>
                         <div className="col-12 col-sm-6 col-lg-12">
                             <div className="border-start ps-4">
-                                <i className="fa fa-users fa-3x text-primary mb-3"></i>
-                                <h4 className="mb-3">Dedicated Team</h4>
-                                <span>Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna</span>
+                                <i className="fa fa-users fa-3x mb-3 name"></i>
+                                <h4 className="mb-3"></h4>
+                                <span>The area is used as a place of work and for storage and processing of farm produce; it is also a place where people live and dispose of wastes.</span>
                             </div>
                         </div>
                     </div>
@@ -58,10 +47,10 @@ function About(){
         </div>
     </div>
 
-    <Team></Team>
-   <Footer></Footer> 
+   
+  
 
-
+<Footer></Footer>
         </Fragment>
     )
 }

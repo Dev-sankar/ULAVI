@@ -1,18 +1,6 @@
 import mongoose from "mongoose";
 
 const orderLandScapeSchema = mongoose.Schema({
-    design : {
-        type: String,
-        required : true
-    },
-    type : {
-        type: String,
-        required: true
-    },
-    scale :{
-        type: String,
-        required: true
-    },
     name : {
         type: String,
         required: true
@@ -25,6 +13,10 @@ const orderLandScapeSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    WhatsAppnumber:{
+        type:String,
+        required:true
+    },
     Date : {
         type: String,
         required: true
@@ -32,7 +24,6 @@ const orderLandScapeSchema = mongoose.Schema({
     email :{
         type: String,
         required: true,
-        unique: true
     }, 
     image:{
         public_id: { type:String },

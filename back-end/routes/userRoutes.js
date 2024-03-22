@@ -7,7 +7,8 @@ import { authUser,
     getUserProfile,
     updateUserProfile,
     getAllUsers,
-    getUserId
+    getUserId,
+    deleteUserId
      } from '../controllers/userController.js';
 import { protect,isAdmin } from '../middleware/authMiddleware.js';
 import { deletegreenId, getgreen, getgreenId, green } from '../controllers/OrdergreenhouseController.js'
@@ -15,6 +16,7 @@ import {orderLandScapes,getorderLandScapes, getorderLandScapeId, deleteorderLand
 import { service ,getservices,getserviceId,deleteserviesId,UpdateService} from '../controllers/ServicesControllers.js';
 // import fromidable from 'express-formidable';
 import {Createservice,getservicesdetail,getservicedetailId,deleteserviesdetailId,updateserviesdetail,getservicedetailName } from '../controllers/ServiceDetailController.js'
+import {ConactPost,GetConact,deleteConactId} from '../controllers/ConactController.js'
 
 
 // Multer configuration for handling file uploads
@@ -30,7 +32,8 @@ const storage = multer.diskStorage({
 router.post('/register', registerUser);
 router.post('/auth', authUser);
 router.post('/logout', logoutUser);
-router.route('/profile').get(isAdmin,getAllUsers).put(protect,isAdmin, updateUserProfile);
+router.route('/profile').get(isAdmin,getAllUsers).put(isAdmin, updateUserProfile);
+router.delete('/userdeleted/:id',isAdmin,deleteUserId)
 
 
 router.post('/greenhouse',imageUpload.single('image') ,green);
@@ -45,19 +48,22 @@ router.delete('/orderLandScape/:id',isAdmin,deleteorderLandScapeId);
 
 
 
-router.post('/Services',isAdmin,imageUpload.single('image'),service);
-router.get('/Services',isAdmin,getservices);
-router.get('/Services/:id', isAdmin,getserviceId);
-router.delete('/Services/:id', isAdmin,deleteserviesId);
-router.patch('/Services/:id',isAdmin,UpdateService);
+router.post('/Services',imageUpload.single('image'),service);
+router.get('/Services',getservices);
+router.get('/Services/:id',getserviceId);
+router.delete('/Services/:id',isAdmin,deleteserviesId);
+router.put('/Services/update/:id',isAdmin,imageUpload.single('image'),UpdateService);
 
-router.post('/ServicesDetails',isAdmin,imageUpload.single('image'),Createservice);
+router.post('/ServicesDetails',imageUpload.single('image'),Createservice);
 router.get('/ServicesDetails',isAdmin,getservicesdetail);
 router.get('/ServicesDetails/:id',isAdmin, getservicedetailId);
 router.get('/ServicesDetails/name/:name', getservicedetailName);
 router.delete('/ServicesDetails/:id',isAdmin,deleteserviesdetailId);
-router.patch('/ServicesDetails/:id',isAdmin,updateserviesdetail);
+router.put('/ServicesDetails/update/:id',isAdmin,imageUpload.single('image'),updateserviesdetail);
 
+router.post('/Conactpost',ConactPost);
+router.get('/Conactget',isAdmin,GetConact);
+router.delete('/deleteConact',isAdmin,deleteConactId);
 
 
 

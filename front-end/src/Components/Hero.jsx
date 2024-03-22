@@ -1,5 +1,7 @@
 import React, {Fragment} from 'react';
 
+import { Link} from 'react-router-dom';
+
 function Hero(){
     return(
         <Fragment>
@@ -13,20 +15,20 @@ function Hero(){
                             <div className="row justify-content-center">
                                 <div className="col-lg-8">
                                     <h1 className="display-1 text-white mb-5 animated slideInDown">Make Your Home Like Garden</h1>
-                                    <a href="" className="btn btn-primary py-sm-3 px-sm-4 sign">Explore More</a>
+                                    {/* <a href="" className="btn btn-primary py-sm-3 px-sm-4 sign">Explore More</a> */}
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="carousel-item">
-                    <img className="w-100" src={require("../Assets/img/carousel-2.jpg")} alt="Image" />
+                    <img className="w-100" src={require("../Assets/img/heroimage2.jpg")} alt="Image" />
                     <div className="carousel-caption">
                         <div className="container">
                             <div className="row justify-content-center">
                                 <div className="col-lg-7">
                                     <h1 className="display-1 text-white mb-5 animated slideInDown">Create Your Own Small Garden At Home</h1>
-                                    <a href="" className="btn btn-primary py-sm-3 px-sm-4 sign ">Explore More</a>
+                                  {/* <a href="/About" className="btn btn-primary py-sm-3 px-sm-4 sign "> <Link to="/About"> Explore More</Link></a>  */}
                                 </div>
                             </div>
                         </div>

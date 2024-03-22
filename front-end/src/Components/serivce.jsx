@@ -1,5 +1,5 @@
 import React,{Fragment,useEffect, useState} from "react";
-import { Button,InputGroup } from "@blueprintjs/core";
+import { Button } from "@blueprintjs/core";
 import '@blueprintjs/core/lib/css/blueprint.css';
 import {Link} from "react-router-dom"
 
@@ -43,63 +43,46 @@ function Service(){
                 <h1 className="display-5 mb-5">Services That We Offer For You</h1>
             </div>
             <div className="row g-4">
-                
-            <div className="container" style={{ marginTop: '8%', textAlign: 'start',       fontFamily: 'Raleway,fantasy'
- }}>
-  
-        <div className="row">
-    
-          {Array.isArray(serivce) && serivce.map((serivce) => (
-            <div key={serivce._id} className="col-md-4 mb-4">
-              <div className="card" style={{ maxHeight: '600px', objectFit: 'cover', width: '90%' }}>
-                <Link to={`/serivce/${serivce._id}`} style={{ textDecoration: 'none' }}>
-                  {serivce.image && (
-                    <div className="image-container">
-                      <img
-                        src={serivce.image.url}
-                        className="card-img-top"
-                        alt="Serivce Image"
-                        style={{
-                          maxHeight: '200px',
-                          objectFit: 'cover',
-                          cursor: 'pointer',
-                          width: '100%',
-                          borderRadius: '8px 8px 0 0',
-                        }}
-                      />
-                      <div className="overlay">
-                       
-                      </div>
-                    </div>
-                  )}
-                </Link>
-                <div className="card-body">
-                <h5 className="card-title">{serivce.name}</h5>
-                  {/* <h5 className="card-title">{serivce.category}</h5> */}
-                  <p className="card-text">{serivce.description}</p>
-                  {/* <p className="card-text">{serivce.location}</p> */}
-                  {/* <p className="card-text">Land Size: {serivce.landSize}</p>
-                  <p className="card-text">Price: {serivce.rentOrLeasePrice}</p> */}
-                   {/* <Link to={`/serivce/${serivce.name}`} className="view-details-btn">
-                          View Details
-                        </Link> */}
-                 <Link to={`/ServiceDetail/${serivce.name}`}> <Button intent="primary"> view details</Button></Link>
+  <div className="container" style={{ marginTop: '8%', textAlign: 'start', fontFamily: 'Raleway, fantasy' }}>
+    <div className="row">
+      {Array.isArray(serivce) && serivce.map((serivce) => (
+        <div key={serivce._id} className="col-md-4 mb-4">
+          <div className="card2" style={{ height: '100%' }}>
+            <Link to={`/serivce/${serivce._id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+              {serivce.image && (
+                <div className="image-container">
+                  <Link to={`/ServiceDetail/${serivce.name}`}>
+                    <img
+                      src={serivce.image.url}
+                      className="card-img-top"
+                      alt="Serivce Image"
+                      style={{
+                        maxHeight: '200px',
+                        objectFit: 'cover',
+                        cursor: 'pointer',
+                        width: '100%',
+                        borderRadius: '8px 8px 0 0',
+                      }}
+                    />
+                  </Link>
+                  <div className="overlay"></div>
                 </div>
-              </div>
+              )}
+            </Link>
+            <div className="card-body" style={{ minHeight: '200px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+              <h3 className="card-title mt-3">{serivce.name}</h3>
+              <p className="card-text mt-2" style={{fontSize:"15px"}}>{serivce.description}</p>
+              <Link to={`/ServiceDetail/${serivce.name}`}>
+                <Button intent="success">View Details</Button>
+              </Link>
             </div>
-          ))}
+          </div>
         </div>
-      </div>
-    
-               
-              
-                
-             
-              
-             
-              
-             
-            </div>
+      ))}
+    </div>
+  </div>
+</div>
+
         </div>
     </div>
 

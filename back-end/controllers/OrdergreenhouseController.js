@@ -1,7 +1,6 @@
 import asyncHandler from 'express-async-handler';
 import cloudinary from '../utils/cloudinary.js';
 import {Green} from "../models/OrdergreenHouseModel.js";
-
 import nodemailer from 'nodemailer'
 import dotenv from 'dotenv';
 
@@ -12,21 +11,27 @@ dotenv.config();
 // // route     POST/api/greenhouse/Ordergreenhouse
 // // @access Public
 const green = asyncHandler(async (req,res) => {
-  const {type,design,parts,sizes, style,structure,shape,floor,material,roof,name,address,number,Date,email,image} = req.body;
+  const {Service, Category, Width,Hight,Maintainace,Location,name,address,number,WhatsAppnumber,Date,email} = req.body;
  
+
 
   const result = await cloudinary.uploader.upload(req.file.path, {
     folder: 'Greenhouse-details',
 });
-  
-  const data = await Green.create ({
-      type,design,parts,sizes,style, structure,shape,floor,material,roof,name,address,number,Date,email,image:{
-        public_id: result.public_id,
-        url: result.secure_url,
-      }
-  });
 
   
+  const data = await Green.create ({
+    Service, Category, Width,Hight,Maintainace,Location,name,address,number,WhatsAppnumber,Date,email,image:{
+        public_id: result.public_id,
+        url: result.secure_url,
+      
+      }
+   
+     
+  });
+
+
+ 
 
 
   if(data){
@@ -41,11 +46,15 @@ const green = asyncHandler(async (req,res) => {
       var mailOptions = {
         from : 'sivasankarshiva008@gmail.com',
         to : email,
-        subject : 'Message From Tillage New Registration',
+        subject : 'Message From ULAVI New Order',
         html : `
-        <h5>Hello you successfully send the landscapeorder <h5/>
+        <h5>
+        "Congratulations on successfully placing your order with us! 🌱 Your commitment to nurturing your garden is truly commendable. We're thrilled to be part of your gardening journey and can't wait for you to receive your selected items. Our team is now working diligently to process your order and ensure its swift delivery to your doorstep. Should you have any questions or need assistance, feel free to reach out to us anytime. Thank you for choosing our homegardening and greenhouse services. Happy gardening!"<h5/>
         `
       };
+
+      
+      
       transporter.sendMail(mailOptions, function(error, info){
         if (error) {
           console.log(error);
@@ -91,8 +100,9 @@ const getgreenId = asyncHandler(async (req, res) => {
 // @access Private
 const deletegreenId = asyncHandler(async (req, res) => {
     const {id} =req.params;
+    console.log(id);
      try  {
-       const ordergreen= await Green.findOneAndDelete(id)
+       const ordergreen= await Green.findByIdAndDelete(id)
        res.json({ message: 'order removed',ordergreen });
      } catch {
        res.status(404);

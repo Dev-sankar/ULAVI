@@ -1,11 +1,10 @@
 import asyncHandler from 'express-async-handler';
 import {Servicedetail} from '../models/ServicesDetailModel.js'
-import fs from 'fs'
-import slugify from 'slugify'; 
-import { toNamespacedPath } from 'path';
 import cloudinary from '../utils/cloudinary.js';
-import multer from 'multer';
 
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 
 
@@ -14,20 +13,22 @@ import multer from 'multer';
 /// @desc  POST Serives
 // // route     POST/api/Servicedetail/
 // // @access isadmin
+
+
 const Createservice = asyncHandler(async (req,res) => {
-    const {name,type,category, description,image} = req.body;
+    const {name,category, description,Price,Services} = req.body;
 
     const result = await cloudinary.uploader.upload(req.file.path, {
         folder: 'service-details',
     });
     
     const data = await Servicedetail.create ({
-        name,type,category, description,image:{
+        name,category, description,Price,Services,image:{
           public_id: result.public_id,
           url: result.secure_url,
       },
         
-    
+ 
     });
     if(data){
         res.status(201).json(data);
@@ -48,6 +49,7 @@ const Createservice = asyncHandler(async (req,res) => {
 const getservicesdetail= asyncHandler(async (req, res) => {
     const serviceDetail= await Servicedetail.find({});
     res.json(serviceDetail);
+    // console.log(serviceDetail);
   });
   
 
@@ -99,8 +101,9 @@ const serviceName = await Servicedetail.find({name:name});
 // @access isadmin
 const deleteserviesdetailId = asyncHandler(async (req, res) => {
     const {id} =req.params;
+    console.log(req.params);
      try  {
-       const deleteserviesdetail= await Servicedetail.findOneAndDelete(id)
+       const deleteserviesdetail= await Servicedetail.findByIdAndDelete(id)
        res.json({ message: 'Servicedetail removed',deleteserviesdetail });
      } catch {
        res.status(404);
@@ -111,27 +114,75 @@ const deleteserviesdetailId = asyncHandler(async (req, res) => {
 
 
 
-      /// @desc  Put Servicedetail
-// // route     Put/api/Servicedetail/
-// // @access admin
+  
 
-   const updateserviesdetail =  asyncHandler (async (req, res) => {
-    try {
-        const id = req.params.id;
-        const name = req.body;
-        const type = req.body;
-        const category= req.body;
-        const description= req.body;
-        const image = await Servicedetail.findByIdAndUpdate(
-            id, name,type,category,description,image
-        )
-        res.send(result)
+
+
+
+
+// @desc Update a design by ID
+// route Patch /api/design/:id
+// @access Private
+const updateserviesdetail = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const { name, category, description,Price,Services} = req.body;
+
+  console.log(req.body);
+
+  // Find the service by ID
+  try {
+    const servicedetail = await Servicedetail.findById(id);
+  
+    if (servicedetail) {
+      // If a new image is uploaded, delete the old image from 
+      
+      if (servicedetail.image && req.file) {
+        await cloudinary.uploader.destroy(req.file.path);
+      }
+  
+      // Upload the new image to Cloudinary
+      if (req.file) {
+        const uploadResult = await cloudinary.uploader.upload(req.file.path, {
+          folder: "service-details",
+        });
+  
+        // Update the service with the new image
+        servicedetail.name = name || servicedetail.name;
+        servicedetail.category = category || servicedetail.category;
+        servicedetail.Price = Price || servicedetail.Price;
+        servicedetail.Services = Services || servicedetail.Services;
+        servicedetail.description = description || servicedetail.description;
+        servicedetail.image = {
+          public_id: uploadResult.public_id,
+          url: uploadResult.secure_url,
+        };
+      } else {
+        // Update the service without a new image
+        servicedetail.name = name || servicedetail.name;
+        servicedetail.category = category || servicedetail.category;
+        servicedetail.Price = Price || servicedetail.Price;
+        servicedetail.Services = Services || servicedetail.Services;
+        servicedetail.description = description || servicedetail.description;
+        servicedetail.image = servicedetail.image
+      }
+  
+      // Save the updated service to the database
+      const updatedService = await servicedetail.save();
+    
+      res.json(updatedService);
     }
-    catch (error) {
-        res.status(400);
-        throw new Error('Service not update')
-    }
-})
+  } catch (error) {
+    console.log(error);
+    res.status(404);
+    throw new Error("Service not found");
+  }
+    
+   
+  
+});
+
+
+
 
 
 

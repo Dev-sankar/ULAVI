@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import Navbar from '../Navbar';
-import Footer from '../Footer';
-import { link, useNavigate} from 'react-router-dom'
+import AdminNavbar from '../admin/adminNavber'
+
+import {  useNavigate} from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const RegistrationForm = () => {
+const UserCreateForm = () => {
   const [formState, setFormState] = useState({
     name: '',
     email: '',
@@ -20,6 +20,7 @@ const RegistrationForm = () => {
       [event.target.name]: event.target.value
     });
   };
+
   const registerUser = async (userData) => {
     try {
       const response = await fetch('http://localhost:5000/api/users/register', {
@@ -37,8 +38,9 @@ const RegistrationForm = () => {
   
       const data = await response.json();
       if(response){
-        Navigate("/login")
         toast.success(data.message);
+        
+        Navigate("/admin")
       }
     return data;
     }catch (error) {
@@ -61,7 +63,7 @@ const RegistrationForm = () => {
 
   return (
     <>
-    <Navbar></Navbar>
+ <AdminNavbar></AdminNavbar>
     <div className=" Regcontainer">
       <form className="form-container" onSubmit={handleFormSubmit}>
         <label htmlFor="name">Name:</label>
@@ -92,9 +94,9 @@ const RegistrationForm = () => {
       </form>
       <ToastContainer />
     </div>
-    <Footer></Footer>
+ 
     </>
   );
 };
 
-export default RegistrationForm;
+export default UserCreateForm;
