@@ -39,7 +39,7 @@ function Serivce() {
   //Serivce GET Start
   const loadservice = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/users/Services', { credentials: 'include' });
+      const response = await fetch(`${process.env.REACT_APP_BACKEND}/api/users/Services`, { credentials: 'include' });
       const data = await response.json();
       setserivce(data);
     }
@@ -56,7 +56,7 @@ function Serivce() {
 //Serivce Deleted Start
   const deleteService = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/users/Services/${id}`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND}/api/users/Services/${id}`, {
         method: 'DELETE',
         credentials: 'include' // Include credentials if necessary
       });
@@ -96,7 +96,7 @@ function Serivce() {
 
 
     try {
-      const response = await axios.put(`http://localhost:5000/api/users/Services/update/${id}`, formData,
+      const response = await axios.put(`${process.env.REACT_APP_BACKEND}/api/users/Services/update/${id}`, formData,
         {
           headers: {
             "Content-Type": 'multipart/form-data',

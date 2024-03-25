@@ -17,7 +17,7 @@ const ServiceDetail = () => {
 
   const loadService = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/api/users/ServicesDetails/name/${name}`, { credentials: 'include' });
+      const response = await fetch(`${process.env.REACT_APP_BACKEND}/api/users/ServicesDetails/name/${name}`, { credentials: 'include' });
       const data = await response.json();
       setServiceDetails(data);
     } catch (error) {

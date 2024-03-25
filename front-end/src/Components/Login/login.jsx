@@ -14,7 +14,7 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const loginUser = async (userData) => {
     try {
-      const response = await fetch('http://localhost:5000/api/users/auth', {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND}/api/users/auth`, {
         method: 'POST',
         credentials: 'include',
         headers: {

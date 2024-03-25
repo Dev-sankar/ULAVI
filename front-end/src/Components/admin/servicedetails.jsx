@@ -56,7 +56,7 @@ const ServiceDetail= ({ match }) => {
   {
      try 
      {
-         const response = await fetch('http://localhost:5000/api/users/ServicesDetails',{ credentials: 'include'});
+         const response = await fetch(`${process.env.REACT_APP_BACKEND}/api/users/ServicesDetails`,{ credentials: 'include'});
           const data = await response.json(); 
           setServiceDetails(data); 
         } 
@@ -77,7 +77,7 @@ const ServiceDetail= ({ match }) => {
         
         const deleteServiceDetails = async (id) => {
           try {
-            const response = await fetch(`http://localhost:5000/api/users/ServicesDetails/${id}`, {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND}/api/users/ServicesDetails/${id}`, {
               method: 'DELETE',
               credentials: 'include' // Include credentials if necessary
             });
@@ -120,7 +120,7 @@ const ServiceDetail= ({ match }) => {
 
 
     try {
-      const response = await axios.put(`http://localhost:5000/api/users/ServicesDetails/update/${id}`, formData,
+      const response = await axios.put(`${process.env.REACT_APP_BACKEND}/api/users/ServicesDetails/update/${id}`, formData,
         {
           headers: {
             "Content-Type": 'multipart/form-data',

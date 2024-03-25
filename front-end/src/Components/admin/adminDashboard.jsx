@@ -13,21 +13,21 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const newUserResponse =  await axios.get('http://localhost:5000/api/users/profile', { withCredentials: true, params: { isNew: true } });
+        const newUserResponse =  await axios.get(`${process.env.REACT_APP_BACKEND}/api/users/profile`, { withCredentials: true, params: { isNew: true } });
         setNewUserCount(newUserResponse.data.length);
 
-        const newServiceResponse = await axios.get('http://localhost:5000/api/users/Services',{ withCredentials: true, params: { isNew: true } });
+        const newServiceResponse = await axios.get(`${process.env.REACT_APP_BACKEND}http://localhost:5000/api/users/Services`,{ withCredentials: true, params: { isNew: true } });
         setNewSerivceCount(newServiceResponse.data.length);
 
         
 
-        const newSerivcedetailResponse = await axios.get('http://localhost:5000/api/users/ServicesDetails',{ withCredentials: true, params: { isNew: true } });
+        const newSerivcedetailResponse = await axios.get(`${process.env.REACT_APP_BACKEND}/api/users/ServicesDetails`,{ withCredentials: true, params: { isNew: true } });
         setNewSerivcedetailCount(newSerivcedetailResponse.data.length);
 
-        const newGreenhouseResponse = await axios.get('http://localhost:5000/api/users/greenhouse', { withCredentials: true });
+        const newGreenhouseResponse = await axios.get(`${process.env.REACT_APP_BACKEND}/api/users/greenhouse`, { withCredentials: true });
         setGreenhouseCount(newGreenhouseResponse.data.length);
 
-        const newLandScapeResponse = await axios.get('http://localhost:5000/api/users/Orderlandscape', { withCredentials: true });
+        const newLandScapeResponse = await axios.get(`${process.env.REACT_APP_BACKEND}/api/users/Orderlandscape`, { withCredentials: true });
         setLandScapeCount(newLandScapeResponse.data.length);
       } catch (error) {
         console.error('Error fetching data:', error);

@@ -25,7 +25,7 @@ function Service(){
       {
          try 
          {
-             const response = await fetch('http://localhost:5000/api/users/Services',{ credentials: 'include'});
+             const response = await fetch(`${process.env.REACT_APP_BACKEND}/api/users/Services`,{ credentials: 'include'});
               const data = await response.json(); 
               setserivce(data); 
             } 

@@ -21,7 +21,7 @@ function Users() {
 
   const loadUser = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/users/profile', { credentials: 'include' });
+      const response = await fetch(`${process.env.REACT_APP_BACKEND}/api/users/profile`, { credentials: 'include' });
       const data = await response.json();
       setusers(data);
     }
@@ -43,7 +43,7 @@ function Users() {
 
       
 
-      const response = await fetch(`http://localhost:5000/api/users/userdeleted/${id}`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND}/api/users/userdeleted/${id}`, {
         method: 'DELETE',
         credentials: 'include' // Include credentials if necessary
       });

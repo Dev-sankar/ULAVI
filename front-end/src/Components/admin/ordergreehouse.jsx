@@ -20,7 +20,7 @@ function OrderGreenhouse ()  {
       {
          try 
          {
-             const response = await fetch('http://localhost:5000/api/users/greenhouse',{ credentials: 'include'});
+             const response = await fetch(`${process.env.REACT_APP_BACKEND}/api/users/greenhouse`,{ credentials: 'include'});
               const data = await response.json(); 
               setgreenhouses(data); 
             } 
@@ -33,7 +33,7 @@ function OrderGreenhouse ()  {
 
             const deleteGreenhouse = async (id) => {
               try {
-                const response = await fetch(`http://localhost:5000/api/users/greenhouse/${id}`, {
+                const response = await fetch(`${process.env.REACT_APP_BACKEND}/api/users/greenhouse/${id}`, {
                   method: 'DELETE',
                   credentials: 'include' // Include credentials if necessary
                 });

@@ -19,7 +19,7 @@ function OrderLandScape ()  {
       {
          try 
          {
-             const response = await fetch('http://localhost:5000/api/users/Orderlandscape',{ credentials: 'include'});
+             const response = await fetch(`${process.env.REACT_APP_BACKEND}/api/users/Orderlandscape`,{ credentials: 'include'});
               const data = await response.json(); 
               setorderLandScapes(data); 
             } 
@@ -32,7 +32,7 @@ function OrderLandScape ()  {
 
             const deleteLandscape = async (id) => {
               try {
-                const response = await fetch(`http://localhost:5000/api/users/orderLandScape/${id}`, {
+                const response = await fetch(`${process.env.REACT_APP_BACKEND}/api/users/orderLandScape/${id}`, {
                   method: 'DELETE',
                   credentials: 'include' // Include credentials if necessary
                 });
